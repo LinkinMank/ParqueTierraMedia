@@ -23,33 +23,33 @@
 		<div class="row justify-content-between">
 			<div class="col-3">
 				<h3>
-					Usuario:
+					Usuario: <c:out value="${user.nombre}"></c:out>
 				</h3>
 				<h5>
-					Dinero disponible:
+					Dinero disponible: <c:out value="${user.dinero}"></c:out>
 				</h5>
 				<h5>
-					Tiempo disponible:
+					Tiempo disponible: <c:out value="${user.tiempo}"></c:out>
 				</h5>
 			</div>
 			<div class="col-2 mt-2">
-				<a class="btn bg-warning bg-gradient" role="button" href="#">Cerrar
+				<a class="btn bg-warning bg-gradient" role="button" href="logout">Cerrar
 					Sesion</a>
 			</div>
 		</div>
 		<nav class="bg-transparent text-white container-fluid mt-3">
 			<div class="row d-flex justify-content-between text-center">
 				<div class="col-2">
-					<a class="nav-link text-white btn btn-dark" role="button" href="#">Inicio</a>
+					<a class="nav-link text-white btn btn-dark" role="button" href="inicio">Inicio</a>
 				</div>
 				<div class="col-2">
-					<a class="nav-link text-white btn btn-dark" role="button" href="#">Atracciones</a>
+					<a class="nav-link text-white btn btn-dark" role="button" href="atracciones">Atracciones</a>
 				</div>
 				<div class="col-2">
-					<a class="nav-link text-white btn btn-dark" role="button" href="#">Promociones</a>
+					<a class="nav-link text-white btn btn-dark" role="button" href="promociones">Promociones</a>
 				</div>
 				<div class="col-2">
-					<a class="nav-link text-white btn btn-dark" role="button" href="#">Itinerario</a>
+					<a class="nav-link text-white btn btn-dark" role="button" href="itinerario">Itinerario</a>
 				</div>
 			</div>
 		</nav>
@@ -61,6 +61,9 @@
 			</div>
 			<div class="row justify-content-center">
 				<ul class="list-group col-12 col-sm-6">
+					<c:forEach items="${ofrecibles}" var="producto">
+						<li class="list-group-item"><c:out value="${producto.nombre}"></c:out>
+					</c:forEach>
 				</ul>
 			</div>
 		</article>

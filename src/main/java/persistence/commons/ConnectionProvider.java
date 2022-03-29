@@ -6,18 +6,18 @@ import java.sql.SQLException;
 
 public class ConnectionProvider {
 	private static String url ="jdbc:sqlite:C:\\Users\\Linkin\\eclipse-workspace\\ParqueTierraMedia\\TierraMedia.db";
-	private static Connection conexion;
+	private static Connection connection;
 	
-	public static Connection getConexion() throws SQLException {
+	public static Connection getConnection() throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch(ClassNotFoundException e){
 			throw new SQLException(e);
 		}
-		if (conexion == null) {
-			conexion = DriverManager.getConnection(url);
+		if (connection == null) {
+			connection = DriverManager.getConnection(url);
 		}
-		return conexion;
+		return connection;
 	}
 }
 

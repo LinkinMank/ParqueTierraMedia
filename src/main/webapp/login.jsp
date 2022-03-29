@@ -27,6 +27,9 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre usuario:</label>
                     <input type="text" class="form-control" id="name" name="username" required>
+                    <br>
+					<label for="password" class="form-label">Contraseña:</label>
+					<input type="password" class="form-control" id="password" name="password"  required>
                 </div>
                 <c:if test="${flash != null}">
 					<div class="alert alert-danger">
@@ -35,7 +38,9 @@
 						</p>
 					</div>
 				</c:if>
+				
                 <button type="submit" class="btn btn-primary">Ingresar</button>
+                </form>
     </div>
 </body>
 
