@@ -23,7 +23,7 @@
         <div class="row justify-content-between">
             <div class="col-3">
                 <h3>
-                    Visitante: <c:out value="${user.nombre}"></c:out>
+                    Usuario: <c:out value="${user.nombre}"></c:out>
                 </h3>
                 <h5>
                     Dinero disponible: <c:out value="${user.dinero}"></c:out>
@@ -42,6 +42,11 @@
                 <div class="col-2">
                     <a class="nav-link text-white btn btn-dark" role="button" href="inicio">Inicio</a>
                 </div>
+                <c:if test="${user.isAdmin()}">
+                    <div class="col-2">
+                        <a class="nav-link text-white btn btn-dark" role="button" href="user">Usuarios</a>
+                    </div>
+                </c:if>
                 <div class="col-2">
                     <a class="nav-link text-white btn btn-dark" role="button" href="atracciones">Atracciones</a>
                 </div>

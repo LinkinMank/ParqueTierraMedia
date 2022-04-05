@@ -42,6 +42,11 @@
                 <div class="col-2">
                     <a class="nav-link text-white btn btn-dark" role="button" href="inicio">Inicio</a>
                 </div>
+                <c:if test="${user.isAdmin()}">
+                    <div class="col-2">
+                        <a class="nav-link text-white btn btn-dark" role="button" href="user">Usuarios</a>
+                    </div>
+                </c:if>
                 <div class="col-2">
                     <a class="nav-link text-white btn btn-dark" role="button" href="atracciones">Atracciones</a>
                 </div>

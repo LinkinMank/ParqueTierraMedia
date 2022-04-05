@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"
         defer></script>
-    <title>Parque Tierra Media - Atracciones</title>
+    <title>Parque Tierra Media - Usuarios</title>
 </head>
 
 <body>
@@ -33,8 +33,7 @@
                 </h5>
             </div>
             <div class="col-2 mt-2">
-                <a class="btn bg-warning bg-gradient" role="button" href="logout">Cerrar
-                    Sesion</a>
+                <a class="btn bg-warning bg-gradient" role="button" href="logout">Cerrar Sesion</a>
             </div>
         </div>
         <nav class="bg-transparent text-white container-fluid mt-3">
@@ -62,70 +61,79 @@
     <main class="container-fluid">
         <article class="container mt-4 text-center">
             <div class="row">
-                <h3>Lista de Atracciones</h3>
+                <h3>Lista de Usuarios</h3>
             </div>
             <div class="row justify-content-center mt-2">
-            	<c:if test="${updateAtrac != null}">
+            	<c:if test="${updateUser != null}">
 						<div class="row text-center">
 							<p class="text-white bg-success bg-gradient">
-								<c:out value="${updateAtrac}"></c:out>
+								<c:out value="${updateUser}"></c:out>
 							</p>
 						</div>
 					</c:if>
-            	<c:if test="${success != null}">
+				<c:if test="${createdUser != null}">
 						<div class="row text-center">
 							<p class="text-white bg-success bg-gradient">
-								<c:out value="${success}"></c:out>
+								<c:out value="${createdUser}"></c:out>
 							</p>
 						</div>
 					</c:if>
-				<c:if test="${createdAtrac != null}">
+				<c:if test="${baja != null}">
 						<div class="row text-center">
-							<p class="text-white bg-success bg-gradient">
-								<c:out value="${createdAtrac}"></c:out>
+							<p class="text-dark bg-warning bg-gradient">
+								<c:out value="${baja}"></c:out>
 							</p>
 						</div>
 					</c:if>
-				<c:if test="${user.isAdmin()}">
-					<div class="mb-3">
-                     	<a class="btn btn-primary" role="button" href="createAtraccion">Nueva Atraccion</a>
-                	</div>
-					</c:if>
+                <div class="mb-3">
+                     <a class="btn btn-primary" role="button" href="createUser">Nuevo Usuario</a>
+                </div>
                 <table class="table table-responsive">
                     <thead>
                         <tr>
+                        	<th scope="col">Id</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Costo</th>
-                            <th scope="col">Duracion</th>
-                            <th scope="col">cupo</th>
-                            <th scope="col"></th>
+                            <th scope="col">Dinero</th>
+                            <th scope="col">Tiempo</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${atrac}" var="atrac">
+                        <c:forEach items="${userlist}" var="userL">
                             <tr>
+                            	<td>
+                            		<c:out value="${userL.id}"></c:out>
+                            	</td>
                                 <td>
-                                    <c:out value="${atrac.nombre}"></c:out>
+                                    <c:out value="${userL.nombre}"></c:out>
                                 </td>
                                 <td>
-                                    <c:out value="${atrac.costo}"></c:out>
+                                    <c:out value="${userL.dinero}"></c:out>
                                 </td>
                                 <td>
-                                    <c:out value="${atrac.tiempo}"></c:out>Hs
+                                    <c:out value="${userL.tiempo}"></c:out>
                                 </td>
                                 <td>
-                                    <c:out value="${atrac.cupo}"></c:out>
-                                <td><c:choose>
-										<c:when test="${atrac.getEsOfrecible()}">
-											<a href="buyAtrac?id=${atrac.id}" class="btn btn-success rounded" role="button">Comprar</a>
-										</c:when>
-										<c:otherwise>
-											<a href="#" class="btn btn-secondary rounded disabled" role="button">No se puede comprar</a>
-										</c:otherwise>
-									</c:choose>
-									<c:if test="${user.isAdmin()}">
-										<a href="editAtraccion?id=${atrac.id}" class="btn btn-info rounded"> Editar </a>
-									</c:if>
+                                    <c:choose>
+                                        <c:when test="${userL.isAdmin()}">
+                                            Admin
+                                        </c:when>
+                                        <c:otherwise>
+                                            Normal
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td>
+                                    <a href="editUser?id=${userL.id}" class="btn btn-info rounded"> Editar </a>
+                                    <c:choose>
+                                    	<c:when test="${userL.estaDeBaja()}">
+                                    		<a href="#" class="btn btn-secondary rounded disabled" role="button">Ya en baja</a>
+                                    	</c:when>
+                                    	<c:otherwise>
+                                    		<a href="darBaja?id=${userL.id}" class="btn btn-danger rounded">Dar De Baja </a>
+                                    	</c:otherwise>
+                                    </c:choose>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -135,3 +143,5 @@
         </article>
     </main>
 </body>
+
+</html>

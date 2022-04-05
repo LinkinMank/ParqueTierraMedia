@@ -61,4 +61,39 @@ public class DAOAtraccion {
 		}
 		return rows > 0;
 	}
+	
+	public boolean update(Atraccion atraccion) {
+		int rows = 0;
+		String sql = "UPDATE Atraccion SET nombre = ?, costo = ?, tiempo = ?, cupo = ? WHERE id = ?";
+		try {
+			Connection conexion = ConnectionProvider.getConnection();
+			PreparedStatement statement = conexion.prepareStatement(sql);
+			statement.setString(1, atraccion.getNombre());
+			statement.setInt(2, atraccion.getCosto());
+			statement.setDouble(3, atraccion.getTiempo());
+			statement.setInt(4, atraccion.getCupo());
+			statement.setInt(5, atraccion.getId());
+			rows = statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows > 0;
+	}
+	
+	public boolean insert(Atraccion atraccion) {
+		int rows = 0;
+		String sql = "INSERT INTO Atraccion (nombre, costo, tiempo, cupo) VALUES (?, ?, ?, ?)";
+		try {
+			Connection conexion = ConnectionProvider.getConnection();
+			PreparedStatement statement = conexion.prepareStatement(sql);
+			statement.setString(1, atraccion.getNombre());
+			statement.setInt(2, atraccion.getCosto());
+			statement.setDouble(3, atraccion.getTiempo());
+			statement.setInt(4, atraccion.getCupo());
+			rows = statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows > 0;
+	}
 }

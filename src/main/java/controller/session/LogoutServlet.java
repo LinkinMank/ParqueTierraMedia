@@ -17,11 +17,8 @@ public class LogoutServlet extends HttpServlet implements Servlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		req.getSession().removeAttribute("user");
-		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/login.jsp");
 		try {
-			dispatcher.forward(req, resp);
-		} catch (ServletException e) {
-			e.printStackTrace();
+			resp.sendRedirect("login.jsp");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
