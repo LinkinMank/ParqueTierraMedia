@@ -72,6 +72,13 @@
 							</p>
 						</div>
 					</c:if>
+				<c:if test="${bajaPromo != null}">
+						<div class="row text-center">
+							<p class="text-dark bg-warning bg-gradient">
+								<c:out value="${bajaPromo}"></c:out>
+							</p>
+						</div>
+					</c:if>
                 <table class="table table-responsive">
                     <thead>
                         <tr>
@@ -84,6 +91,7 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${promo}" var="promo">
+                        <c:if test="${!promo.estaDeBaja() || user.isAdmin()}">
                             <tr>
                                 <td>
                                     <c:out value="${promo.nombre}"></c:out>
@@ -107,8 +115,20 @@
 											<a href="#" class="btn btn-secondary rounded disabled" role="button">No se puede comprar</a>
 										</c:otherwise>
 									</c:choose>
+									<c:if test="${user.isAdmin()}">
+										<a href="editPromocion?id=${promo.id}&tipo=${promo.tipo}" class="btn btn-info rounded"> Editar </a>
+										<c:choose>
+											<c:when test="${promo.estaDeBaja()}">
+												<a href="#" class="btn btn-secondary rounded disabled"> Ya esta de Baja</a>
+											</c:when>
+											<c:otherwise>
+												<a href="darBajaPromo?id=${promo.id}" class="btn btn-danger rounded"> Dar De Baja </a>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
                                 </td>
                             </tr>
+                           </c:if>
                         </c:forEach>
                     </tbody>
                 </table>

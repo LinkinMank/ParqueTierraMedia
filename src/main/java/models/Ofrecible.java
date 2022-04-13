@@ -9,4 +9,6 @@ public interface Ofrecible {
 	public double getTiempo();
 	
 	public boolean esPromocion();
+	
+	public boolean estaDeBaja();
 }

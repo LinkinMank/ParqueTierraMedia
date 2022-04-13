@@ -32,14 +32,24 @@ public class LoginServlet extends HttpServlet implements Servlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 
-		User currectUser = userService.login(username, password);
-		if (!currectUser.isNull()) {
-			req.getSession().setAttribute("user", currectUser);
+		User currentUser = userService.login(username, password);
+		if (!currentUser.isNull() && !currentUser.estaDeBaja()) {
+			req.getSession().setAttribute("user", currentUser);
 				try {
 					resp.sendRedirect("inicio");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+		} else if(currentUser.estaDeBaja()) {
+			req.setAttribute("bajaUser", "Este usuario esta dado de baja");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+			try {
+				dispatcher.forward(req, resp);
+			} catch (ServletException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
 			req.setAttribute("flash", "Nombre de usuario o contraseña incorrectos");
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");

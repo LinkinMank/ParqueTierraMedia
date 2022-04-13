@@ -67,7 +67,11 @@
 			<div class="row justify-content-center">
 				<ul class="list-group col-12 col-sm-6">
 					<c:forEach items="${ofrecibles}" var="producto">
-						<li class="list-group-item"><c:out value="${producto.nombre}"></c:out>
+					<c:if test="${!producto.estaDeBaja()}">
+						<li class="list-group-item">
+							<c:out value="${producto.nombre}"></c:out>
+						</li>
+					</c:if>
 					</c:forEach>
 				</ul>
 			</div>

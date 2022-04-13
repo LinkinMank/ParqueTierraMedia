@@ -86,6 +86,13 @@
 							</p>
 						</div>
 					</c:if>
+				<c:if test="${bajaAtrac != null}">
+						<div class="row text-center">
+							<p class="text-dark bg-warning bg-gradient">
+								<c:out value="${bajaAtrac}"></c:out>
+							</p>
+						</div>
+					</c:if>
 				<c:if test="${user.isAdmin()}">
 					<div class="mb-3">
                      	<a class="btn btn-primary" role="button" href="createAtraccion">Nueva Atraccion</a>
@@ -98,11 +105,12 @@
                             <th scope="col">Costo</th>
                             <th scope="col">Duracion</th>
                             <th scope="col">cupo</th>
-                            <th scope="col"></th>
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${atrac}" var="atrac">
+                        <c:if test="${!atrac.estaDeBaja() || user.isAdmin()}">
                             <tr>
                                 <td>
                                     <c:out value="${atrac.nombre}"></c:out>
@@ -117,17 +125,26 @@
                                     <c:out value="${atrac.cupo}"></c:out>
                                 <td><c:choose>
 										<c:when test="${atrac.getEsOfrecible()}">
-											<a href="buyAtrac?id=${atrac.id}" class="btn btn-success rounded" role="button">Comprar</a>
+											<a href="buyAtrac?id=${atrac.id}" class="btn btn-success rounded">Comprar</a>
 										</c:when>
 										<c:otherwise>
-											<a href="#" class="btn btn-secondary rounded disabled" role="button">No se puede comprar</a>
+											<a href="#" class="btn btn-secondary rounded disabled">No se puede comprar</a>
 										</c:otherwise>
 									</c:choose>
 									<c:if test="${user.isAdmin()}">
 										<a href="editAtraccion?id=${atrac.id}" class="btn btn-info rounded"> Editar </a>
+										<c:choose>
+											<c:when test="${atrac.estaDeBaja()}">
+												<a href="#" class="btn btn-secondary rounded disabled"> Ya esta de Baja</a>
+											</c:when>
+											<c:otherwise>
+												<a href="darBajaAtrac?id=${atrac.id}" class="btn btn-danger rounded"> Dar De Baja </a>
+											</c:otherwise>
+										</c:choose>
 									</c:if>
                                 </td>
                             </tr>
+                            </c:if>
                         </c:forEach>
                     </tbody>
                 </table>

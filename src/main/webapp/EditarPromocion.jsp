@@ -1,0 +1,92 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous" defer></script>
+<title>Parque Tierra Media - Editar Promocion</title>
+</head>
+
+<body>
+	<header
+		class="container-fluid bg-secondary bg-gradient text-white pt-1">
+		<div class="row">
+			<div class="col">
+				<h3 class="m-1">Editar Promocion</h3>
+			</div>
+			<div class="col m-2 text-end">
+				<a class="btn btn-light" role="button" href="promociones">&lt;
+					Atras</a>
+			</div>
+		</div>
+	</header>
+	<main class="bg-light">
+		<div class="w-75 m-auto pt-3">
+			<form id="editPromocionForm" action="editPromocion" method="post">
+				<input type="hidden" name="promoId" value="${editPromo.id}">
+				<input type="hidden" name="promoTipo" value="${editPromo.tipo}">
+				<div class="row mb-2">
+					<label for="name" class="col-form-label col-sm-2">Nombre Actual:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="name" name="name" value="${editPromo.nombre}" disabled>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label for="newName" class="form-label col-sm-2">Nuevo Nombre:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="newName" name="newname" value="${editPromo.nombre}">
+					</div>
+				</div>
+				<c:choose>
+					<c:when test="${editPromo.tipo == 'Porcentual'}">
+					<div class="row mb-2">
+						<label for="descuento" class="col-form-label col-sm-2">Descuento Actual:</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="descuento" name="descuento" value="${editPromo.getDescuento()}" disabled>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="newDescuento" class="col-form-label col-sm-2">Nuevo Descuento:</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="newDescuento" name="newdescuento" min="0" value="${editPromo.getDescuento()}">
+						</div>
+					</div>
+					</c:when>
+					<c:when test="${editPromo.tipo == 'Absoluta'}">
+					<div class="row mb-2">
+						<label for="costo" class="col-form-label col-sm-2">Costo Actual:</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="costo" name="costo" value="${editPromo.costo}" disabled>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="newCosto" class="col-form-label col-sm-2">Nuevo Costo:</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="newCosto" name="newcosto" min="0" value="${editPromo.costo}">
+						</div>
+					</div>
+					</c:when>
+				</c:choose>	
+				<button type="#" class="btn btn-primary">Actualizar</button>
+				<a href="promociones" class="btn btn-danger">Cancelar</a>
+			</form>
+		</div>
+	</main>
+</body>
+
+</html>

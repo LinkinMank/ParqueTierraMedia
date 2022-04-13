@@ -56,7 +56,7 @@ public class AtraccionesService {
 	}
 	
 	public void updateAtraccion(int atracId, String nombre, int costo, double tiempo, int cupo) {
-		Atraccion editAtrac = new Atraccion(atracId, nombre, costo, tiempo, cupo);
+		Atraccion editAtrac = new Atraccion(atracId, nombre, costo, tiempo, cupo, 0);
 		daoAtraccion.update(editAtrac);
 	}
 	
@@ -66,8 +66,12 @@ public class AtraccionesService {
 				return false;
 			}
 		}
-		Atraccion createAtraccion = new Atraccion (0, nombre, costo, tiempo, cupo);
+		Atraccion createAtraccion = new Atraccion (0, nombre, costo, tiempo, cupo, 0);
 		daoAtraccion.insert(createAtraccion);
 		return true;
+	}
+	
+	public void darBaja(int id) {
+		daoAtraccion.darBaja(id);
 	}
 }

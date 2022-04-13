@@ -78,10 +78,10 @@
 							</p>
 						</div>
 					</c:if>
-				<c:if test="${baja != null}">
+				<c:if test="${bajaUser != null}">
 						<div class="row text-center">
 							<p class="text-dark bg-warning bg-gradient">
-								<c:out value="${baja}"></c:out>
+								<c:out value="${bajaUser}"></c:out>
 							</p>
 						</div>
 					</c:if>
@@ -131,7 +131,7 @@
                                     		<a href="#" class="btn btn-secondary rounded disabled" role="button">Ya en baja</a>
                                     	</c:when>
                                     	<c:otherwise>
-                                    		<a href="darBaja?id=${userL.id}" class="btn btn-danger rounded">Dar De Baja </a>
+                                    		<a href="darBajaUser?id=${userL.id}" class="btn btn-danger rounded">Dar De Baja </a>
                                     	</c:otherwise>
                                     </c:choose>
                                 </td>

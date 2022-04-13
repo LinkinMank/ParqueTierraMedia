@@ -21,7 +21,7 @@ public class DAOAtraccion {
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				atraccionesList.add(new Atraccion(result.getInt(1), result.getString(2), result.getInt(3),
-						result.getDouble(4), result.getInt(5)));
+						result.getDouble(4), result.getInt(5), result.getInt(6)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -30,7 +30,7 @@ public class DAOAtraccion {
 	}
 
 	public Atraccion findById(int Id) {
-		Atraccion atraccion = new Atraccion(0, "", 0, 0, 0);
+		Atraccion atraccion = new Atraccion(0, "", 0, 0, 0, 0);
 		String sql = "SELECT * FROM Atraccion WHERE Atraccion.id = ?";
 		try {
 			Connection conexion = ConnectionProvider.getConnection();
@@ -39,7 +39,7 @@ public class DAOAtraccion {
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				atraccion = new Atraccion(result.getInt(1), result.getString(2), result.getInt(3), result.getDouble(4),
-						result.getInt(5));
+						result.getInt(5), result.getInt(6));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,7 +82,7 @@ public class DAOAtraccion {
 	
 	public boolean insert(Atraccion atraccion) {
 		int rows = 0;
-		String sql = "INSERT INTO Atraccion (nombre, costo, tiempo, cupo) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO Atraccion (nombre, costo, tiempo, cupo, baja) VALUES (?, ?, ?, ?, ?)";
 		try {
 			Connection conexion = ConnectionProvider.getConnection();
 			PreparedStatement statement = conexion.prepareStatement(sql);
@@ -90,6 +90,22 @@ public class DAOAtraccion {
 			statement.setInt(2, atraccion.getCosto());
 			statement.setDouble(3, atraccion.getTiempo());
 			statement.setInt(4, atraccion.getCupo());
+			statement.setInt(5, 0);
+			rows = statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows > 0;
+	}
+	
+	public boolean darBaja(int id) {
+		int rows = 0;
+		String sql = "UPDATE Atraccion SET baja = ? WHERE id = ?";
+		try {
+			Connection conexion = ConnectionProvider.getConnection();
+			PreparedStatement statement = conexion.prepareStatement(sql);
+			statement.setInt(1, 1);
+			statement.setInt(2, id);
 			rows = statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

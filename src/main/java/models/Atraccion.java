@@ -9,14 +9,16 @@ public class Atraccion implements Ofrecible {
 	private int costo;
 	private double tiempo;
 	private int cupo;
+	private int baja;
 	private boolean esOfrecible = true;
 	
-	public Atraccion(int id, String nombre, int costo, double tiempo, int cupo) {
+	public Atraccion(int id, String nombre, int costo, double tiempo, int cupo, int baja) {
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
 		this.tiempo = tiempo;
 		this.cupo = cupo;
+		this.baja = baja;
 	}
 	
 	public int getId() {
@@ -37,6 +39,10 @@ public class Atraccion implements Ofrecible {
 	
 	public int getCupo() {
 		return this.cupo;
+	}
+	
+	public boolean estaDeBaja() {
+		return this.baja == 1;
 	}
 	
 	public boolean getEsOfrecible() {

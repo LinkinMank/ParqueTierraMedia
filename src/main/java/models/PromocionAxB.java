@@ -6,12 +6,17 @@ import java.util.List;
 public class PromocionAxB extends Promocion {
 	private String atraccionesGratis;
 
-	public PromocionAxB(int id, String nombre, String atracciones, String atraccionesGratis, List<Atraccion> listaAtraccion) {
-		super(id, nombre, atracciones, listaAtraccion);
+	public PromocionAxB(int id, String nombre, String tipo, int baja, String atracciones, String atraccionesGratis, List<Atraccion> listaAtraccion) {
+		super(id, nombre, tipo, baja, atracciones, listaAtraccion);
 		this.atraccionesGratis = atraccionesGratis;
 		enlazarAtraccion();
 		calcularTiempo();
 		calcularCosto();
+	}
+	
+	public PromocionAxB(int id, String nombre, String tipo, String atracciones, String atraccionesGratis) {
+		super(id, nombre, tipo, atracciones);
+		this.atraccionesGratis = atraccionesGratis;
 	}
 
 	@Override

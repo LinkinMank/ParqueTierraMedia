@@ -38,7 +38,13 @@
 						</p>
 					</div>
 				</c:if>
-				
+				<c:if test="${bajaUser != null}">
+					<div class="alert alert-danger">
+						<p>
+							<c:out value="${bajaUser}"></c:out>
+						</p>
+					</div>
+				</c:if>
                 <button type="submit" class="btn btn-primary">Ingresar</button>
                 </form>
     </div>

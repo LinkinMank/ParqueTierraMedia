@@ -51,4 +51,12 @@ public class PromocionesService {
 			}
 		}
 	}
+	
+	public Promocion find(int id, String tipo) {
+		return daoPromocion.findById(id, tipo);
+	}
+	
+	public void darBaja(int id) {
+		daoPromocion.darBaja(id);
+	}
 }

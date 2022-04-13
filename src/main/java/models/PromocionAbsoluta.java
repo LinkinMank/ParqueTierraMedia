@@ -4,10 +4,15 @@ import java.util.List;
 
 public class PromocionAbsoluta extends Promocion {
 
-	public PromocionAbsoluta(int id, String nombre, int costo, String atracciones, List<Atraccion> listaAtraccion) {
-		super(id, nombre, atracciones, listaAtraccion);
+	public PromocionAbsoluta(int id, String nombre, String tipo, int baja, int costo, String atracciones, List<Atraccion> listaAtraccion) {
+		super(id, nombre, tipo, baja, atracciones, listaAtraccion);
 		enlazarAtraccion();
 		calcularTiempo();
+		calcularCosto(costo);
+	}
+	
+	public PromocionAbsoluta(int id, String nombre, String tipo, int costo, String atracciones) {
+		super(id, nombre, tipo, atracciones);
 		calcularCosto(costo);
 	}
 

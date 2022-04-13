@@ -1,4 +1,4 @@
-package controller.user;
+package controller.promociones;
 
 import java.io.IOException;
 
@@ -9,12 +9,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import services.UserService;
+import services.PromocionesService;
 
-@WebServlet("/darBaja")
-public class DarBajaServlet extends HttpServlet implements Servlet {
-	private static final long serialVersionUID = 5725640716740488581L;
-	private UserService userService;
+@WebServlet("/darBajaPromo")
+public class DarBajaPromoServlet extends HttpServlet implements Servlet {
+	private static final long serialVersionUID = 4791185308810646079L;
+	private PromocionesService promoService;
 	
 	@Override
 	public void init() {
@@ -23,15 +23,15 @@ public class DarBajaServlet extends HttpServlet implements Servlet {
 		} catch (ServletException e) {
 			e.printStackTrace();
 		}
-		userService = new UserService();
+		promoService = new PromocionesService();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-		int userId = Integer.parseInt(req.getParameter("id"));
-		userService.darBaja(userId);
-		req.setAttribute("baja", "Usuario id = " + userId + ", dado de baja");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user");
+		int promoId = Integer.parseInt(req.getParameter("id"));
+		promoService.darBaja(promoId);
+		req.setAttribute("bajaPromo", "Promocion id = " + promoId + ", dada de baja");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promociones");
 		try {
 			dispatcher.forward(req, resp);
 		} catch (ServletException e) {
@@ -39,5 +39,6 @@ public class DarBajaServlet extends HttpServlet implements Servlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+		}
+
 }
